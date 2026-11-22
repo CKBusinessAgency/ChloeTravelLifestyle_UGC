@@ -282,7 +282,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;font-size:12px;
     </div>
     <div class="work-grid">
       <figure>
-        <div class="feature"><video src="media/featured-midtown.mp4" poster="img/featured-midtown.jpg" controls playsinline preload="metadata" aria-label="Featured reel: Midtown Manhattan Property &amp; Atmosphere"></video></div>
+        <div class="feature"><video id="featuredVideo" data-video="featured-midtown" poster="img/featured-midtown.jpg" controls playsinline preload="metadata" aria-label="Featured reel: Midtown Manhattan Property &amp; Atmosphere"></video></div>
         <figcaption class="figcap"><span class="eyebrow">Featured Reel · 0:42</span><span>Midtown Manhattan Property &amp; Atmosphere</span></figcaption>
       </figure>
       <div>
@@ -357,18 +357,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;font-size:12px;
 /* ---------- EDIT HERE ----------
    To play a reel directly on this page, set its `video` to a video URL or file path.
    Reels without a video show a link to the full reel on the live site. */
+/* Videos load from your Cloudflare R2 bucket first. The page tries each file name
+   below in order, then falls back to the copy in the media/ folder. */
+const VIDEO_BASE = "https://pub-f56e91e6d69c48808777fff50358f945.r2.dev";
+const VIDEO_FILES = {"featured-midtown": "hotel-hendricks-guest-journey.mov", "midtown-campaign": "midtown-manhattan-hotel-campaign.mp4", "villa-stay": "chloe-reel.mov", "poolside-cabana": "thompson-hotel-pool-cabana.mp4", "lake-tahoe": "lake-tahoe-ski-heavenly.mp4", "cancun-balcony": "cancun-resort-balcony-view.mp4", "cancun-mixology": "cancun-mixology-workshop.mp4", "mexico-resort": "mexico-resort-guest-experience.mp4"};
+function videoSources(key){
+  const o = VIDEO_FILES[key] || "", list = [];
+  const add = u => { if (u && !list.includes(u)) list.push(u); };
+  if (VIDEO_BASE) {
+    add(`${VIDEO_BASE}/${o}`);
+    add(`${VIDEO_BASE}/${o.replace(/\.mov$/i, ".mp4")}`);
+    add(`${VIDEO_BASE}/${key}.mp4`);
+    add(`${VIDEO_BASE}/media/${key}.mp4`);
+    add(`${VIDEO_BASE}/media/${o}`);
+  }
+  add(`media/${key}.mp4`);
+  return list.map(u => `<source src="${u}">`).join("");
+}
 const LIVE_SITE = "https://chloesjourni.ckbusinessagency.com/#work";
 const REELS = {
   featured:{tag:"Featured Reel",title:"Midtown Manhattan Property & Atmosphere",meta:"Landscape Reel · 0:42",poster:"img/featured-midtown.jpg",video:""},
 };
 const LIST = [
-  {tag:"Hotel Location Campaign",title:"Midtown Manhattan Hotel Location Campaign",meta:"Portrait Reel · 0:45",poster:"img/midtown-campaign.jpg",portrait:true,video:"media/midtown-campaign.mp4"},
-  {tag:"Hospitality Feature",title:"Villa Stay | Guest Experience",meta:"Landscape Reel · 0:17",poster:"img/villa-stay.jpg",video:"media/villa-stay.mp4"},
-  {tag:"Hotel Amenity Experience",title:"Hotel Poolside Cabana with Skyline View",meta:"Landscape Reel · 0:13",poster:"img/poolside-cabana.jpg",video:"media/poolside-cabana.mp4"},
-  {tag:"Destination Experience",title:"South Lake Tahoe Ski Trip ft Ski Resort",meta:"Portrait Reel · 0:42",poster:"img/lake-tahoe.jpg",portrait:true,video:"media/lake-tahoe.mp4"},
-  {tag:"Resort Experience",title:"Cancun Resort — Private Balcony Lagoon & Ocean View",meta:"Portrait Reel · 0:10",poster:"img/cancun-balcony.jpg",portrait:true,video:"media/cancun-balcony.mp4"},
-  {tag:"Resort Experience",title:"Cancun Resort — Mixology Workshop",meta:"Portrait Reel · 0:18",poster:"img/cancun-mixology.jpg",portrait:true,video:"media/cancun-mixology.mp4"},
-  {tag:"Resort Experience",title:"Mexico Resort — Guest Experience",meta:"Portrait Reel · 0:17",poster:"img/mexico-resort.jpg",portrait:true,video:"media/mexico-resort.mp4"},
+  {tag:"Hotel Location Campaign",title:"Midtown Manhattan Hotel Location Campaign",meta:"Portrait Reel · 0:45",poster:"img/midtown-campaign.jpg",portrait:true,video:"midtown-campaign"},
+  {tag:"Hospitality Feature",title:"Villa Stay | Guest Experience",meta:"Landscape Reel · 0:17",poster:"img/villa-stay.jpg",video:"villa-stay"},
+  {tag:"Hotel Amenity Experience",title:"Hotel Poolside Cabana with Skyline View",meta:"Landscape Reel · 0:13",poster:"img/poolside-cabana.jpg",video:"poolside-cabana"},
+  {tag:"Destination Experience",title:"South Lake Tahoe Ski Trip ft Ski Resort",meta:"Portrait Reel · 0:42",poster:"img/lake-tahoe.jpg",portrait:true,video:"lake-tahoe"},
+  {tag:"Resort Experience",title:"Cancun Resort — Private Balcony Lagoon & Ocean View",meta:"Portrait Reel · 0:10",poster:"img/cancun-balcony.jpg",portrait:true,video:"cancun-balcony"},
+  {tag:"Resort Experience",title:"Cancun Resort — Mixology Workshop",meta:"Portrait Reel · 0:18",poster:"img/cancun-mixology.jpg",portrait:true,video:"cancun-mixology"},
+  {tag:"Resort Experience",title:"Mexico Resort — Guest Experience",meta:"Portrait Reel · 0:17",poster:"img/mexico-resort.jpg",portrait:true,video:"mexico-resort"},
 ];
 const BAND1 = ["Luxury Hotels","Boutique Hotels","Resorts","Vacation Properties","Spas & Wellness","Fine Dining","Destination Experiences","Tourism & DMOs"];
 const BAND2 = ["Excursions & Tours","Airlines","Airport Lounges","Luxury Transportation","Cruise Lines","Yacht Experiences","Retail","Lifestyle & Travel Accessories","Booking & Travel Tech"];
@@ -398,6 +415,7 @@ const PILLARS = [
 
 const $ = id => document.getElementById(id);
 const scr=$("screen"), player=$("player"), vidTitle=$("vidTitle"), reels=$("reels"), band1=$("band1"), band2=$("band2"), m1=$("m1"), m2=$("m2"), delivCards=$("delivCards"), whyCards=$("whyCards");
+{ const fv = document.getElementById("featuredVideo"); fv.innerHTML = videoSources(fv.dataset.video); fv.load(); }
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 document.getElementById("yr").textContent = new Date().getFullYear();
 
@@ -433,7 +451,7 @@ document.addEventListener("click",e=>{
   player.className = "player" + (d.portrait ? " p" : "");
   vidTitle.textContent = d.title;
   if (d.video) {
-    scr.innerHTML = `<video src="${esc(d.video)}" controls autoplay playsinline poster="${d.poster}"></video>`;
+    scr.innerHTML = `<video controls autoplay playsinline preload="auto" poster="${d.poster}">${videoSources(d.video)}</video>`;
   } else {
     scr.innerHTML = `<img class="poster" src="${d.poster}" alt=""><div class="msg"><span class="eyebrow" style="color:rgba(255,255,255,.7)">${esc(d.meta)}</span><p>${esc(d.title)}</p><a class="btn" href="${LIVE_SITE}" target="_blank" rel="noopener">Watch the full reel →</a></div>`;
   }
