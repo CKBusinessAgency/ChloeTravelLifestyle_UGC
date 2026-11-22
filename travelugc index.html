@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chloe K. Lacy — Travel & Lifestyle UGC Creator</title>
+<meta property="og:title" content="Chloe K. Lacy — Travel &amp; Lifestyle UGC Creator">
+<meta name="description" content="Chloe is a travel & lifestyle UGC creator based in Houston, Texas crafting authentic, marketing-driven content for hospitality brands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3efec; --fg:#2d2420; --muted:#7d716b; --border:#e1d8d3;
+  --primary:#8f7f77; --primary-fg:#fbf8f6; --gold:#c4a093; --accent:#d9c4bb;
+  --secondary:#e7dad3; --espresso:#2e2420; --approach:#928279;
+  --display:"Cormorant Garamond", Georgia, serif; --sans:"Figtree", system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.5}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,.display{font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+em,.it{font-style:italic;color:var(--gold)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.eyebrow.gold{color:var(--gold)}
+
+/* nav */
+header{position:absolute;inset:0 0 auto 0;z-index:30}
+header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:32px;padding-bottom:32px}
+.logo{font-family:var(--display);font-size:24px}
+.logo span{font-style:italic;color:var(--gold)}
+nav.links{display:flex;gap:36px;font-size:14px;color:var(--muted)}
+nav.links a:hover{color:var(--fg)}
+.pill{border:1px solid rgba(45,36,32,.2);border-radius:999px;padding:8px 16px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:.2s}
+.pill:hover{background:var(--fg);color:var(--primary-fg)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:170px 0 120px}
+.glow{position:absolute;right:-160px;top:80px;width:520px;height:520px;border-radius:50%;background:rgba(196,160,147,.2);filter:blur(64px);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:center;position:relative}
+.hero h1{font-size:clamp(44px,7vw,88px);line-height:1.02;margin-top:24px}
+.hero h1 span{display:block}
+.lead{margin-top:32px;max-width:36rem;font-size:18px;line-height:1.65;color:var(--muted)}
+.ctas{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--primary);color:var(--primary-fg);border-radius:999px;padding:13px 24px;font-size:14px;font-weight:500;transition:.2s}
+.btn:hover{opacity:.9}
+.ulink{font-size:14px;text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:8px;transition:.2s}
+.ulink:hover{color:var(--gold)}
+.stats{margin-top:56px;max-width:32rem;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--border);padding-top:32px}
+.stats dd{margin-top:8px;font-family:var(--display);font-size:24px;line-height:1.15}
+.portrait{position:relative;max-width:448px;margin:0 auto;aspect-ratio:4/5;border-radius:2rem;overflow:hidden;box-shadow:0 30px 60px -20px rgba(45,36,32,.35)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.portrait .cap{position:absolute;inset:auto 0 0 0;padding:24px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+.portrait .cap p:first-child{font-family:var(--display);font-style:italic;font-size:18px}
+.portrait .cap p:last-child{margin-top:4px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.8}
+
+.fade{opacity:0;transform:translateY(14px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* marquee */
+.mq-head{border-top:1px solid rgba(45,36,32,.1);border-bottom:1px solid rgba(45,36,32,.1)}
+.mq-head .wrap{display:flex;align-items:center;gap:24px;padding-top:16px;padding-bottom:16px}
+.mq-head .line{flex:1;height:1px;background:rgba(45,36,32,.15)}
+.band{overflow:hidden;padding:30px 0}
+.band.dark{background:var(--espresso);color:var(--bg)}
+.band.light{background:var(--secondary)}
+.track{display:flex;width:max-content}
+.track span{display:inline-flex;align-items:center;gap:44px;padding:0 22px;font-family:var(--display);font-style:italic;font-size:60px;white-space:nowrap;line-height:1.1}
+.track span i{font-style:normal;font-size:34px;color:var(--gold)}
+.ltr{animation:ltr 60s linear infinite}
+.rtl{animation:rtl 60s linear infinite}
+.band:hover .track{animation-play-state:paused}
+@keyframes ltr{from{transform:translateX(-33.333%)}to{transform:translateX(0)}}
+@keyframes rtl{from{transform:translateX(0)}to{transform:translateX(-33.333%)}}
+.mq-mobile{display:none}
+@media (prefers-reduced-motion:reduce){.ltr,.rtl{animation:none}.fade{animation:none;opacity:1;transform:none}}
+
+/* about */
+.section{padding:140px 0}
+.two{display:grid;grid-template-columns:5fr 7fr;gap:64px}
+.section h2{font-size:clamp(32px,5vw,60px);line-height:1.08;margin-top:20px}
+.small-caps{margin-top:32px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.copy{font-size:18px;line-height:1.7;color:rgba(45,36,32,.85)}
+.copy p+p{margin-top:24px}
+.more{display:none}
+.more.open{display:block;margin-top:24px;animation:fadein .4s}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.toggle{margin-top:20px;color:var(--gold);font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+.toggle:hover{color:var(--fg)}
+
+/* work */
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.work-head p{max-width:28rem;font-size:14px;color:var(--muted)}
+.work-grid{margin-top:56px;display:grid;grid-template-columns:7fr 5fr;gap:40px}
+.feature{position:relative;border-radius:2rem;overflow:hidden;background:var(--primary);box-shadow:0 30px 60px -20px rgba(45,36,32,.35);aspect-ratio:16/9;width:100%;display:block}
+.feature img,.feature video{width:100%;height:100%;object-fit:cover;display:block}
+.feature .play-lg{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.12);transition:.25s}
+.feature:hover .play-lg{background:rgba(0,0,0,.25)}
+.play-lg b{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;transition:transform .25s}
+.feature:hover .play-lg b{transform:scale(1.06)}
+.figcap{margin-top:20px;display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.reels{list-style:none;border-top:1px solid var(--border)}
+.reels li{border-bottom:1px solid var(--border)}
+.reel{display:flex;align-items:center;gap:24px;width:100%;text-align:left;padding:22px 0}
+.thumb{position:relative;flex-shrink:0;border-radius:12px;overflow:hidden;height:112px;background:#ddd}
+.thumb.p{aspect-ratio:9/16}.thumb.l{aspect-ratio:16/9}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb .ov{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.18);transition:.2s}
+.reel:hover .ov{background:rgba(0,0,0,.3)}
+.ov b{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center}
+.reel .meta{flex:1;min-width:0}
+.reel h3{margin-top:8px;font-size:24px;line-height:1.15}
+.reel .fmt{margin-top:4px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.reel .arr{font-size:20px;color:var(--muted);transition:.2s}
+.reel:hover .arr{transform:translateX(4px);color:var(--gold)}
+.outline{margin-top:32px;display:inline-flex;align-items:center;gap:12px;border:1px solid rgba(45,36,32,.2);border-radius:999px;padding:10px 20px;font-size:14px;transition:.2s}
+.outline:hover{background:var(--fg);color:var(--primary-fg)}
+
+/* approach */
+.approach{background:var(--approach);color:var(--primary-fg)}
+.approach h2 em{color:#e9d3c9}
+.approach .eyebrow{color:#e9d3c9}
+.approach p.sub{margin-top:20px;max-width:42rem;line-height:1.65;color:rgba(251,248,246,.72)}
+.approach .outline{border-color:rgba(251,248,246,.25)}
+.approach .outline:hover{background:var(--primary-fg);color:var(--approach)}
+
+/* contact */
+.contact{position:relative;overflow:hidden;background:#dccbc4;text-align:center}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(196,160,147,.5),transparent 45%);pointer-events:none}
+.contact .wrap{position:relative;max-width:900px}
+.contact h2{font-size:clamp(34px,6vw,76px)}
+.contact p.sub{margin:32px auto 0;max-width:36rem;font-size:18px;color:var(--muted)}
+.contact .ctas{justify-content:center}
+.email-text{margin-top:20px;font-size:13px;letter-spacing:.08em;color:var(--muted)}
+
+footer{border-top:1px solid var(--border);padding:40px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+
+/* modals */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.modal.open{display:flex;animation:fadein .25s}
+.sheet{position:relative;width:100%;max-width:900px;max-height:85vh;overflow-y:auto;background:var(--bg);border-radius:2rem;padding:48px;color:var(--fg)}
+.sheet h2{font-size:clamp(26px,4vw,48px);line-height:1.1;margin-top:16px;padding-right:40px}
+.sheet .intro{margin-top:16px;max-width:42rem;color:var(--muted)}
+.close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);color:var(--muted);display:grid;place-items:center;transition:.2s}
+.close:hover{background:var(--fg);color:var(--primary-fg)}
+.cards{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{border:1px solid var(--border);background:rgba(231,218,211,.5);border-radius:1rem;padding:24px;transition:.2s}
+.card:hover{border-color:rgba(196,160,147,.5)}
+.card .n{font-family:var(--display);font-size:26px;color:var(--gold)}
+.card h3{margin-top:6px;font-size:21px;line-height:1.2}
+.card p{margin-top:8px;font-size:14px;line-height:1.6;color:var(--muted)}
+
+.player{position:relative;width:100%;max-width:1000px}
+.player.p{max-width:min(420px,calc((100vh - 140px) * 9 / 16))}
+.player .close{top:-52px;right:0;border-color:rgba(255,255,255,.3);color:#fff}
+.player .close:hover{background:#fff;color:#000}
+.screen{position:relative;border-radius:2rem;overflow:hidden;background:#000;aspect-ratio:16/9}
+.player.p .screen{aspect-ratio:9/16}
+.screen video{width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.screen .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(28px) brightness(.4);transform:scale(1.3)}
+.screen .msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;text-align:center;color:#fff}
+.screen .msg p{font-family:var(--display);font-size:26px;font-style:italic;line-height:1.2}
+.screen .msg .btn{background:#fff;color:var(--fg)}
+.player .ttl{margin-top:16px;text-align:center;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+
+/* responsive */
+@media (max-width:900px){
+  .wrap{padding:0 22px}
+  nav.links{display:none}
+  .hero{padding:110px 0 70px}
+  .hero-grid,.two,.work-grid{grid-template-columns:1fr}
+  .hero-grid{gap:48px}
+  .lead{font-size:16px}
+  .stats dd{font-size:19px}
+  .section{padding:80px 0}
+  .work-head{flex-direction:column;align-items:flex-start}
+  .mq-desktop{display:none}
+  .mq-mobile{display:block}
+  .mq-mobile .band{padding:26px 22px}
+  .mq-mobile ul{list-style:none;font-family:var(--display);font-style:italic;font-size:26px;line-height:1.2}
+  .mq-mobile li{display:flex;gap:12px;align-items:baseline;margin-top:6px}
+  .mq-mobile li i{font-style:normal;font-size:18px;color:var(--gold)}
+  .mq-head .right{display:none}
+  .reel{gap:16px;padding:18px 0}
+  .thumb{height:92px}
+  .reel h3{font-size:19px}
+  .reel .fmt{font-size:10px}
+  .sheet{padding:28px 20px;border-radius:1.25rem;max-height:90vh}
+  .cards{grid-template-columns:1fr;gap:14px}
+  footer .wrap{flex-direction:column;align-items:center;text-align:center}
+}
+@media (max-width:480px){.logo{font-size:19px}.pill{font-size:10px;padding:6px 12px}.stats{gap:12px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="logo">Chloe <span>K.</span> Lacy</a>
+    <nav class="links">
+      <a href="#about">About</a><a href="#approach">Approach</a><a href="#work">Work</a><a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="pill">Book Chloe</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow fade">Luxury Travel &amp; Lifestyle · UGC</p>
+      <h1>
+        <span class="fade">Aspirational.</span>
+        <span class="fade it" style="animation-delay:.08s">Authentic.</span>
+        <span class="fade" style="animation-delay:.16s">Worth sharing.</span>
+      </h1>
+      <p class="lead fade" style="animation-delay:.24s">I'm Chloe — an elevated travel and lifestyle content creator + marketer helping hotels, resorts, spas, restaurants, tourism brands, and premium travel experiences turn moments into stories guests can already picture themselves in.</p>
+      <div class="ctas fade" style="animation-delay:.32s">
+        <a href="#work" class="btn">View recent work <span aria-hidden="true">→</span></a>
+        <a href="#contact" class="ulink">Start a collaboration</a>
+      </div>
+      <dl class="stats fade" style="animation-delay:.4s">
+        <div><dt class="eyebrow">Based</dt><dd>Houston, TX</dd></div>
+        <div><dt class="eyebrow">Focus</dt><dd>Hospitality</dd></div>
+        <div><dt class="eyebrow">Formats</dt><dd>Portrait &amp; Landscape</dd></div>
+      </dl>
+    </div>
+    <div class="fade" style="animation-delay:.2s">
+      <div class="portrait">
+        <img src="img/chloe-portrait.jpg" alt="Chloe K. Lacy, luxury travel and lifestyle content creator">
+        <div class="cap"><p>“Every detail is worth capturing.”</p><p>— Chloe K. Lacy</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-label="Partnership types">
+  <div class="mq-head"><div class="wrap">
+    <span class="eyebrow">Partnership Types</span><span class="line"></span>
+    <span class="eyebrow gold right">Hospitality · Travel · Lifestyle</span>
+  </div></div>
+  <div class="mq-desktop">
+    <div class="band dark"><div class="track ltr" id="band1"></div></div>
+    <div class="band light"><div class="track rtl" id="band2"></div></div>
+  </div>
+  <div class="mq-mobile">
+    <div class="band dark"><p class="eyebrow" style="color:rgba(243,239,236,.6)">Hospitality</p><ul id="m1"></ul></div>
+    <div class="band light"><p class="eyebrow">Travel &amp; Lifestyle</p><ul id="m2"></ul></div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">About Chloe</p>
+      <h2>A marketer's mind.<br><em>A storyteller's eye.</em></h2>
+      <p class="small-caps">Dallas born · Houston based</p>
+    </div>
+    <div class="copy">
+      <p>In today's travel landscape, guests are seeking more than a place to stay — they are searching for experiences that feel authentic, elevated, and worth sharing. Chloe K. Lacy is a travel and lifestyle content creator who helps hotels, resorts, spas, restaurants, tourism organizations, and premium travel brands showcase those moments through engaging, high-quality user-generated content.</p>
+      <p>Specializing in hotels, boutique properties, resorts, spas, fine dining, destination experiences, excursions, and travel lifestyle brands, Chloe creates content that allows potential guests to envision themselves immersed in every aspect of a brand — from the welcome experience and accommodations to wellness, dining, curated activities, and the journey itself.</p>
+      <div class="more" id="more">
+        <p>With a background in marketing and entrepreneurship, Chloe brings a unique perspective to content creation. She understands not only how to produce visually compelling content but also how hospitality brands use content to increase awareness, strengthen guest engagement, and drive bookings.</p>
+        <p>As a marketer, Chloe has worked with businesses to develop marketing campaigns, customer acquisition strategies, and brand positioning initiatives. Today she applies that expertise to travel and hospitality content designed to support brand growth and inspire future guests.</p>
+        <p>Her style blends luxury, lifestyle, wellness, and storytelling — capturing the details that make a guest experience memorable, and staying aspirational while remaining genuine and relatable.</p>
+      </div>
+      <button class="toggle" id="toggle" aria-expanded="false" aria-controls="more">Show more ↓</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work" style="padding-top:40px">
+  <div class="wrap">
+    <div class="work-head">
+      <div><p class="eyebrow">Deliverables</p><h2>Selected <em>work</em></h2></div>
+      <p>Portrait and landscape UGC crafted for social, websites, YouTube, and digital campaigns — including product showcases, guest experience highlights, and travel itinerary guides.</p>
+    </div>
+    <div class="work-grid">
+      <figure>
+        <div class="feature"><video src="media/featured-midtown.mp4" poster="img/featured-midtown.jpg" controls playsinline preload="metadata" aria-label="Featured reel: Midtown Manhattan Property &amp; Atmosphere"></video></div>
+        <figcaption class="figcap"><span class="eyebrow">Featured Reel · 0:42</span><span>Midtown Manhattan Property &amp; Atmosphere</span></figcaption>
+      </figure>
+      <div>
+        <ul class="reels" id="reels"></ul>
+        <button class="outline" data-open="deliv">View all collaboration deliverables <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section approach" id="approach">
+  <div class="wrap">
+    <div style="max-width:48rem">
+      <p class="eyebrow">Why travel &amp; hospitality brands choose Chloe</p>
+      <h2>Content that <em>converts</em> —<br>not just likes.</h2>
+      <p class="sub">Six pillars shape every partnership: authentic storytelling, elevated travel &amp; lifestyle focus, marketing-driven creation, complete guest journeys, channel-ready assets, and reliable collaboration.</p>
+    </div>
+    <button class="outline" data-open="why" style="margin-top:40px">See why brands partner with Chloe <span aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Let's collaborate</p>
+    <h2 style="margin-top:24px">Have an experience <em>worth capturing?</em></h2>
+    <p class="sub">Whether it's a five-star resort, a boutique hotel, a serene spa, a chef's tasting menu, or a premium travel experience — let's create the content that inspires your next guest to book.</p>
+    <div class="ctas" style="margin-top:40px">
+      <a href="mailto:chloe@ckbusinessagency.com" class="btn" style="padding:16px 28px">Email Chloe <span aria-hidden="true">→</span></a>
+      <a href="#work" class="ulink">Revisit the work</a>
+    </div>
+    <p class="email-text">chloe@ckbusinessagency.com</p>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p>© <span id="yr"></span> Chloe K. Lacy · All rights reserved</p>
+  <p>Elevated Travel &amp; Lifestyle UGC · Houston, TX</p>
+</div></footer>
+
+<!-- Deliverables modal -->
+<div class="modal" id="deliv" role="dialog" aria-modal="true" aria-label="Collaboration deliverables">
+  <div class="sheet">
+    <button class="close" data-close aria-label="Close">✕</button>
+    <p class="eyebrow gold">Collaboration Deliverables</p>
+    <h2>Every partnership is customized</h2>
+    <p class="intro">Every partnership is customized to align with the brand's marketing objectives, campaign goals, and target audience. Deliverables may include one or more of the following:</p>
+    <div class="cards" id="delivCards"></div>
+  </div>
+</div>
+
+<!-- Why modal -->
+<div class="modal" id="why" role="dialog" aria-modal="true" aria-label="Why travel and hospitality brands choose Chloe">
+  <div class="sheet">
+    <button class="close" data-close aria-label="Close">✕</button>
+    <p class="eyebrow gold">Why travel &amp; hospitality brands choose Chloe</p>
+    <h2>Content that <em>converts</em> — not just likes</h2>
+    <p class="intro">Every partnership is built on a clear, strategic approach to creating content that inspires travelers and drives real business results.</p>
+    <div class="cards" id="whyCards"></div>
+  </div>
+</div>
+
+<!-- Video modal -->
+<div class="modal" id="vid" role="dialog" aria-modal="true" aria-label="Video" style="background:rgba(0,0,0,.82)">
+  <div class="player" id="player">
+    <button class="close" data-close aria-label="Close video">✕</button>
+    <div class="screen" id="screen"></div>
+    <p class="ttl" id="vidTitle"></p>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT HERE ----------
+   To play a reel directly on this page, set its `video` to a video URL or file path.
+   Reels without a video show a link to the full reel on the live site. */
+const LIVE_SITE = "https://chloesjourni.ckbusinessagency.com/#work";
+const REELS = {
+  featured:{tag:"Featured Reel",title:"Midtown Manhattan Property & Atmosphere",meta:"Landscape Reel · 0:42",poster:"img/featured-midtown.jpg",video:""},
+};
+const LIST = [
+  {tag:"Hotel Location Campaign",title:"Midtown Manhattan Hotel Location Campaign",meta:"Portrait Reel · 0:45",poster:"img/midtown-campaign.jpg",portrait:true,video:"media/midtown-campaign.mp4"},
+  {tag:"Hospitality Feature",title:"Villa Stay | Guest Experience",meta:"Landscape Reel · 0:17",poster:"img/villa-stay.jpg",video:"media/villa-stay.mp4"},
+  {tag:"Hotel Amenity Experience",title:"Hotel Poolside Cabana with Skyline View",meta:"Landscape Reel · 0:13",poster:"img/poolside-cabana.jpg",video:"media/poolside-cabana.mp4"},
+  {tag:"Destination Experience",title:"South Lake Tahoe Ski Trip ft Ski Resort",meta:"Portrait Reel · 0:42",poster:"img/lake-tahoe.jpg",portrait:true,video:"media/lake-tahoe.mp4"},
+  {tag:"Resort Experience",title:"Cancun Resort — Private Balcony Lagoon & Ocean View",meta:"Portrait Reel · 0:10",poster:"img/cancun-balcony.jpg",portrait:true,video:"media/cancun-balcony.mp4"},
+  {tag:"Resort Experience",title:"Cancun Resort — Mixology Workshop",meta:"Portrait Reel · 0:18",poster:"img/cancun-mixology.jpg",portrait:true,video:"media/cancun-mixology.mp4"},
+  {tag:"Resort Experience",title:"Mexico Resort — Guest Experience",meta:"Portrait Reel · 0:17",poster:"img/mexico-resort.jpg",portrait:true,video:"media/mexico-resort.mp4"},
+];
+const BAND1 = ["Luxury Hotels","Boutique Hotels","Resorts","Vacation Properties","Spas & Wellness","Fine Dining","Destination Experiences","Tourism & DMOs"];
+const BAND2 = ["Excursions & Tours","Airlines","Airport Lounges","Luxury Transportation","Cruise Lines","Yacht Experiences","Retail","Lifestyle & Travel Accessories","Booking & Travel Tech"];
+const DELIVERABLES = [
+  ["Guest Experience Storytelling","Capturing the complete customer journey—from arrival and first impressions to memorable moments throughout the experience—through authentic, engaging visual storytelling."],
+  ["Destination & Lifestyle Campaigns","Showcasing destinations through immersive content that inspires travelers to explore local culture, attractions, dining, and unique experiences."],
+  ["Hospitality Experience Campaigns","Highlighting accommodations, amenities, wellness offerings, dining, entertainment, and exceptional service to encourage future bookings and elevate brand perception."],
+  ["Brand Storytelling Campaigns","Creating content that communicates a brand's personality, values, and unique guest experience while building trust and emotional connection with audiences."],
+  ["User-Generated Content (UGC)","Producing authentic, platform-optimized content designed for brand-owned social media, websites, email marketing, paid advertising, and digital campaigns."],
+  ["Social Media Campaigns","Developing engaging short-form content tailored for Instagram, TikTok, Facebook, Pinterest, and other social platforms to increase reach and audience engagement."],
+  ["Product & Service Showcases","Featuring hospitality services, travel products, amenities, culinary offerings, wellness experiences, and premium upgrades through lifestyle-driven content."],
+  ["Launch & Promotional Campaigns","Supporting grand openings, seasonal promotions, new experiences, limited-time offerings, and special events with compelling visual content."],
+  ["Travel Itinerary & Experience Guides","Creating curated travel guides and itinerary-style content that showcases how guests can maximize their stay and experience a destination."],
+  ["Visual Asset Creation","Delivering high-quality photography and video libraries that brands can repurpose across websites, digital advertising, social media, presentations, and marketing collateral."],
+  ["Brand Ambassador Partnerships","Representing brands through long-term collaborations that provide consistent storytelling, recurring content creation, campaign support, and authentic audience engagement."],
+  ["Content Licensing & Marketing Assets","Providing professionally edited content with optional licensing for paid advertising, websites, email campaigns, digital marketing, and other commercial marketing initiatives."],
+];
+const PILLARS = [
+  ["Professional yet authentic storytelling","Content that feels editorial and elevated — while still warm, human, and grounded in the real guest experience."],
+  ["Elevated travel & lifestyle focus","A refined eye for hotels, resorts, spas, restaurants, excursions, cruises, lounges, and premium travel experiences that deserve to be shared."],
+  ["Marketing-driven creation","Every asset is built with a purpose — awareness, engagement, bookings — informed by a background in strategy."],
+  ["Complete guest journeys","From the welcome moment to accommodations, wellness, dining, excursions, and curated activities — nothing missed."],
+  ["Landscape or portrait assets, made for your audience","High-quality content optimized for all channels including websites, YouTube, and the platforms your future guests browse."],
+  ["Reliable, collaborative partnership","Clear communication, thoughtful briefs, and on-time delivery — the kind of partner your team will want to rebook."],
+];
+/* ---------- end of editable content ---------- */
+
+const $ = id => document.getElementById(id);
+const scr=$("screen"), player=$("player"), vidTitle=$("vidTitle"), reels=$("reels"), band1=$("band1"), band2=$("band2"), m1=$("m1"), m2=$("m2"), delivCards=$("delivCards"), whyCards=$("whyCards");
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const bandHTML = arr => [...arr,...arr,...arr].map(t=>`<span>${esc(t)}<i aria-hidden="true">°</i></span>`).join("");
+band1.innerHTML = bandHTML(BAND1); band2.innerHTML = bandHTML(BAND2);
+const li = arr => arr.map(t=>`<li><i aria-hidden="true">°</i><span>${esc(t)}</span></li>`).join("");
+m1.innerHTML = li(BAND1); m2.innerHTML = li(BAND2);
+
+const play = `<b><svg width="14" height="14" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="#2d2420"/></svg></b>`;
+reels.innerHTML = LIST.map((d,i)=>`<li><button class="reel" data-reel="${i}" aria-label="Play ${esc(d.title)}">
+  <span class="thumb ${d.portrait?'p':'l'}"><img src="${d.poster}" alt="" loading="lazy"><span class="ov">${play}</span></span>
+  <span class="meta"><span class="eyebrow gold">${esc(d.tag)}</span><h3>${esc(d.title)}</h3><span class="fmt">${esc(d.meta)}</span></span>
+  <span class="arr" aria-hidden="true">→</span></button></li>`).join("");
+
+delivCards.innerHTML = DELIVERABLES.map(([t,b])=>`<div class="card"><h3>${esc(t)}</h3><p>${esc(b)}</p></div>`).join("");
+whyCards.innerHTML = PILLARS.map(([t,b],i)=>`<div class="card"><p class="n">0${i+1}</p><h3>${esc(t)}</h3><p>${esc(b)}</p></div>`).join("");
+
+const more = document.getElementById("more"), tg = document.getElementById("toggle");
+tg.onclick = () => { const o = more.classList.toggle("open"); tg.setAttribute("aria-expanded",o); tg.textContent = o ? "Show less ↑" : "Show more ↓"; };
+
+let lastFocus = null;
+function openModal(id){ lastFocus = document.activeElement; const m = document.getElementById(id); m.classList.add("open"); document.body.style.overflow="hidden"; m.querySelector("[data-close]").focus(); }
+function closeModal(m){ m.classList.remove("open"); document.body.style.overflow=""; if(m.id==="vid") scr.innerHTML=""; lastFocus && lastFocus.focus(); }
+document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>openModal(b.dataset.open));
+document.querySelectorAll(".modal").forEach(m=>{
+  m.addEventListener("click",e=>{ if(e.target===m || e.target.closest("[data-close]")) closeModal(m); });
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.querySelectorAll(".modal.open").forEach(closeModal); });
+
+document.addEventListener("click",e=>{
+  const b = e.target.closest("[data-reel]"); if(!b) return;
+  const k = b.dataset.reel, d = k==="featured" ? REELS.featured : LIST[+k];
+  player.className = "player" + (d.portrait ? " p" : "");
+  vidTitle.textContent = d.title;
+  if (d.video) {
+    scr.innerHTML = `<video src="${esc(d.video)}" controls autoplay playsinline poster="${d.poster}"></video>`;
+  } else {
+    scr.innerHTML = `<img class="poster" src="${d.poster}" alt=""><div class="msg"><span class="eyebrow" style="color:rgba(255,255,255,.7)">${esc(d.meta)}</span><p>${esc(d.title)}</p><a class="btn" href="${LIVE_SITE}" target="_blank" rel="noopener">Watch the full reel →</a></div>`;
+  }
+  openModal("vid");
+});
+</script>
+</body>
+</html>
