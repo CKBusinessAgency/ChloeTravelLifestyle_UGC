@@ -374,6 +374,31 @@ function videoSources(key){
   add(`media/${key}.mp4`);
   return list.map(u => `<source src="${u}">`).join("");
 }
+/* Cover images: each one tries your R2 bucket first, then the copy in the img/ folder. */
+const POSTER_FILES = {"featured-midtown": "hotel-hendricks-guest-journey.jpg", "midtown-campaign": "midtown-manhattan-poster.jpg", "villa-stay": "luxury-stay-vacaanda.jpg", "poolside-cabana": "thompson-hotel-pool-cabana.jpg", "lake-tahoe": "lake-tahoe-ski-heavenly.jpg", "cancun-balcony": "cancun-resort-balcony-view.jpg", "cancun-mixology": "cancun-mixology-workshop.jpg", "mexico-resort": "mexico-resort-guest-experience.jpg"};
+function posterList(key){
+  const o = POSTER_FILES[key] || "", list = [];
+  const add = u => { if (u && !list.includes(u)) list.push(u); };
+  if (VIDEO_BASE && o) { add(`${VIDEO_BASE}/${o}`); add(`${VIDEO_BASE}/img/${o}`); add(`${VIDEO_BASE}/${key}.jpg`); add(`${VIDEO_BASE}/img/${key}.jpg`); }
+  add(`img/${key}.jpg`);
+  return list;
+}
+const posterCache = {};
+/* Resolves to the first cover URL that loads, and remembers it. */
+function resolvePoster(key){
+  if (posterCache[key]) return Promise.resolve(posterCache[key]);
+  const list = posterList(key);
+  return new Promise(done => {
+    const tryAt = i => {
+      if (i >= list.length) return done(list[list.length-1]);
+      const im = new Image();
+      im.onload = () => { posterCache[key] = list[i]; done(list[i]); };
+      im.onerror = () => tryAt(i+1);
+      im.src = list[i];
+    };
+    tryAt(0);
+  });
+}
 const LIVE_SITE = "https://chloesjourni.ckbusinessagency.com/#work";
 const REELS = {
   featured:{tag:"Featured Reel",title:"Midtown Manhattan Property & Atmosphere",meta:"Landscape Reel · 0:42",poster:"img/featured-midtown.jpg",video:""},
@@ -415,7 +440,7 @@ const PILLARS = [
 
 const $ = id => document.getElementById(id);
 const scr=$("screen"), player=$("player"), vidTitle=$("vidTitle"), reels=$("reels"), band1=$("band1"), band2=$("band2"), m1=$("m1"), m2=$("m2"), delivCards=$("delivCards"), whyCards=$("whyCards");
-{ const fv = document.getElementById("featuredVideo"); fv.innerHTML = videoSources(fv.dataset.video); fv.load(); }
+{ const fv = document.getElementById("featuredVideo"); fv.innerHTML = videoSources(fv.dataset.video); fv.load(); resolvePoster(fv.dataset.video).then(u => fv.poster = u); }
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 document.getElementById("yr").textContent = new Date().getFullYear();
 
@@ -426,9 +451,10 @@ m1.innerHTML = li(BAND1); m2.innerHTML = li(BAND2);
 
 const play = `<b><svg width="14" height="14" viewBox="0 0 24 24"><path d="M7 4l14 8-14 8z" fill="#2d2420"/></svg></b>`;
 reels.innerHTML = LIST.map((d,i)=>`<li><button class="reel" data-reel="${i}" aria-label="Play ${esc(d.title)}">
-  <span class="thumb ${d.portrait?'p':'l'}"><img src="${d.poster}" alt="" loading="lazy"><span class="ov">${play}</span></span>
+  <span class="thumb ${d.portrait?'p':'l'}"><img data-poster="${d.video}" src="${d.poster}" alt=""><span class="ov">${play}</span></span>
   <span class="meta"><span class="eyebrow gold">${esc(d.tag)}</span><h3>${esc(d.title)}</h3><span class="fmt">${esc(d.meta)}</span></span>
   <span class="arr" aria-hidden="true">→</span></button></li>`).join("");
+document.querySelectorAll("img[data-poster]").forEach(im => resolvePoster(im.dataset.poster).then(u => { if (im.src !== u) im.src = u; }));
 
 delivCards.innerHTML = DELIVERABLES.map(([t,b])=>`<div class="card"><h3>${esc(t)}</h3><p>${esc(b)}</p></div>`).join("");
 whyCards.innerHTML = PILLARS.map(([t,b],i)=>`<div class="card"><p class="n">0${i+1}</p><h3>${esc(t)}</h3><p>${esc(b)}</p></div>`).join("");
@@ -451,7 +477,7 @@ document.addEventListener("click",e=>{
   player.className = "player" + (d.portrait ? " p" : "");
   vidTitle.textContent = d.title;
   if (d.video) {
-    scr.innerHTML = `<video controls autoplay playsinline preload="auto" poster="${d.poster}">${videoSources(d.video)}</video>`;
+    scr.innerHTML = `<video controls autoplay playsinline preload="auto" poster="${posterCache[d.video] || d.poster}">${videoSources(d.video)}</video>`;
   } else {
     scr.innerHTML = `<img class="poster" src="${d.poster}" alt=""><div class="msg"><span class="eyebrow" style="color:rgba(255,255,255,.7)">${esc(d.meta)}</span><p>${esc(d.title)}</p><a class="btn" href="${LIVE_SITE}" target="_blank" rel="noopener">Watch the full reel →</a></div>`;
   }
