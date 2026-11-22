@@ -367,6 +367,7 @@ function videoSources(key){
   if (VIDEO_BASE) {
     add(`${VIDEO_BASE}/${o}`);
     add(`${VIDEO_BASE}/${o.replace(/\.mov$/i, ".mp4")}`);
+    add(`${VIDEO_BASE}/chloe-ugc-videos/${o}`);
     add(`${VIDEO_BASE}/${key}.mp4`);
     add(`${VIDEO_BASE}/media/${key}.mp4`);
     add(`${VIDEO_BASE}/media/${o}`);
@@ -376,10 +377,15 @@ function videoSources(key){
 }
 /* Cover images: each one tries your R2 bucket first, then the copy in the img/ folder. */
 const POSTER_FILES = {"featured-midtown": "hotel-hendricks-guest-journey.jpg", "midtown-campaign": "midtown-manhattan-poster.jpg", "villa-stay": "luxury-stay-vacaanda.jpg", "poolside-cabana": "thompson-hotel-pool-cabana.jpg", "lake-tahoe": "lake-tahoe-ski-heavenly.jpg", "cancun-balcony": "cancun-resort-balcony-view.jpg", "cancun-mixology": "cancun-mixology-workshop.jpg", "mexico-resort": "mexico-resort-guest-experience.jpg"};
+/* Folder(s) in your R2 bucket that hold the covers, tried in order. ("chloe-ugc-videos" may be the bucket's own name,
+   in which case it isn't part of the public URL, so both forms are tried.) */
+const POSTER_FOLDERS = ["UGC video cover images/", "chloe-ugc-videos/UGC video cover images/"];
 function posterList(key){
   const o = POSTER_FILES[key] || "", list = [];
   const add = u => { if (u && !list.includes(u)) list.push(u); };
-  if (VIDEO_BASE && o) { add(`${VIDEO_BASE}/${o}`); add(`${VIDEO_BASE}/img/${o}`); add(`${VIDEO_BASE}/${key}.jpg`); add(`${VIDEO_BASE}/img/${key}.jpg`); }
+  if (VIDEO_BASE && o) {
+    POSTER_FOLDERS.forEach(f => add(`${VIDEO_BASE}/${encodeURI(f)}${encodeURIComponent(o)}`));
+    add(`${VIDEO_BASE}/${o}`); add(`${VIDEO_BASE}/img/${o}`); add(`${VIDEO_BASE}/${key}.jpg`); add(`${VIDEO_BASE}/img/${key}.jpg`); }
   add(`img/${key}.jpg`);
   return list;
 }
